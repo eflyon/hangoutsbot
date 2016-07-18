@@ -935,6 +935,8 @@ def configure_logging(args):
     logger = logging.getLogger()
     if args.debug:
         logger.setLevel(logging.DEBUG)
+    elif args.quiet:
+        logger.setLevel(logging.WARNING)
 
 
 def main():
@@ -951,6 +953,8 @@ def main():
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-d', '--debug', action='store_true',
                         help=_('log detailed debugging messages'))
+    parser.add_argument('-q', '--quiet', action='store_true',
+                        help=_('log only important information'))
     parser.add_argument('--log', default=default_log_path,
                         help=_('log file path'))
     parser.add_argument('--cookies', default=default_cookies_path,
