@@ -5,32 +5,57 @@ import random
 import re
 from titlecase import titlecase
 
+
 def _initialise(bot):
     plugins.register_handler(_handle_hate)
+    plugins.register_handler(_handle_bc)
+    plugins.register_handler(_handle_wc)
+
 
 def _handle_hate(bot, event, command):
     if event.text.startswith('.hate'):
         card, transformations = random.choice(black)
-        substitutions = []
-
-        for modifier in transformations:
-            whitecard = random.choice(white)
-            if modifier is 'C':
-                # Capitalizes the first letter
-                substitutions.append(whitecard[0].capitalize() + whitecard[1:])
-            elif modifier is 'T':
-                # Capitalizes the First Letter of Each Word
-                substitutions.append(titlecase(whitecard))
-            elif modifier is 'A':
-                # CAPITALIZES ALL LETTERS OH MY GOD
-                substitutions.append(whitecard.upper())
-            elif modifier is 'S':
-                # lowercaseandspacelesswithoutpunctuation
-                substitutions.append(re.sub("\W", "", whitecard).lower())
-            else:
-                substitutions.append(whitecard)
+        substitutions = [transform_white(random.choice(white), mod) for mod in transformations]
         
         yield from bot.coro_send_message(event.conv, card % tuple(substitutions))
+
+
+def _handle_bc(bot, event, command):
+    if event.text.startswith('.bc'):
+        fragments = re.split('(_[CTAS]?)', event.text[4:])
+
+        for i in range(len(fragments)):
+            if fragments[i].startswith('_'):
+                fragments[i] = transform_white(random.choice(white), fragments[i][1:])
+
+        yield from bot.coro_send_message(event.conv, "".join(fragments))
+
+
+def _handle_wc(bot, event, command):
+    if event.text.startswith('.wc'):
+        whites = event.text[4:].split(' # ')
+
+        if len(whites) in (1, 2):
+            card, modifiers = random.choice(black)
+            while len(modifiers) != len(whites):
+                card, modifiers = random.choice(black)
+            yield from bot.coro_send_message(event.conv, 
+                card % tuple(transform_white(x, y) for x, y in zip(whites, modifiers)))
+        else:
+            yield from bot.coro_send_message(event.conv, "One or two white cards only, please.")
+
+
+def transform_white(whitecard, modifier):
+    if modifier is 'C':    # Capitalizes the first letter
+        return whitecard[0].capitalize() + whitecard[1:]
+    elif modifier is 'T':  # Capitalizes the First Letter of Each Word
+        return titlecase(whitecard)
+    elif modifier is 'A':  # CAPITALIZES ALL LETTERS OH MY GOD
+        return whitecard.upper()
+    elif modifier is 'S':  # lowercaseandspacelesswithoutpunctuation
+        return re.sub("\W", "", whitecard).lower()
+    else:
+        return whitecard
 
 
 # JUST GONNA INCLUDE THE WHOLE DAMN THING IN HERE
