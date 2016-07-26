@@ -34,8 +34,6 @@ def _handle_hate(bot, event, command):
 
 
 # JUST GONNA INCLUDE THE WHOLE DAMN THING IN HERE
-# This Python file uses the following encoding: utf-8
-
 
 white = (
     ###
@@ -1970,7 +1968,7 @@ white = (
     "Affirmative Action",
     "airline food",
     "all Mexican people, including the Puerto Ricans",
-    "american exceptionalism",
+    "American exceptionalism",
     "an apathetic government employee",
     "an interspecies orgy",
     "an off-center soul patch",
