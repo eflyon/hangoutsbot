@@ -5,32 +5,57 @@ import random
 import re
 from titlecase import titlecase
 
+
 def _initialise(bot):
     plugins.register_handler(_handle_hate)
+    plugins.register_handler(_handle_bc)
+    plugins.register_handler(_handle_wc)
+
 
 def _handle_hate(bot, event, command):
     if event.text.startswith('.hate'):
         card, transformations = random.choice(black)
-        substitutions = []
-
-        for modifier in transformations:
-            whitecard = random.choice(white)
-            if modifier is 'C':
-                # Capitalizes the first letter
-                substitutions.append(whitecard[0].capitalize() + whitecard[1:])
-            elif modifier is 'T':
-                # Capitalizes the First Letter of Each Word
-                substitutions.append(titlecase(whitecard))
-            elif modifier is 'A':
-                # CAPITALIZES ALL LETTERS OH MY GOD
-                substitutions.append(whitecard.upper())
-            elif modifier is 'S':
-                # lowercaseandspacelesswithoutpunctuation
-                substitutions.append(re.sub("\W", "", whitecard).lower())
-            else:
-                substitutions.append(whitecard)
+        substitutions = [transform_white(random.choice(white), mod) for mod in transformations]
         
         yield from bot.coro_send_message(event.conv, card % tuple(substitutions))
+
+
+def _handle_bc(bot, event, command):
+    if event.text.startswith('.bc'):
+        fragments = re.split('(_[CTAS]?)', event.text[4:])
+
+        for i in range(len(fragments)):
+            if fragments[i].startswith('_'):
+                fragments[i] = transform_white(random.choice(white), fragments[i][1:])
+
+        yield from bot.coro_send_message(event.conv, "".join(fragments))
+
+
+def _handle_wc(bot, event, command):
+    if event.text.startswith('.wc'):
+        whites = event.text[4:].split(' # ')
+
+        if len(whites) in (1, 2):
+            card, modifiers = random.choice(black)
+            while len(modifiers) != len(whites):
+                card, modifiers = random.choice(black)
+            yield from bot.coro_send_message(event.conv, 
+                card % tuple(transform_white(x, y) for x, y in zip(whites, modifiers)))
+        else:
+            yield from bot.coro_send_message(event.conv, "One or two white cards only, please.")
+
+
+def transform_white(whitecard, modifier):
+    if modifier is 'C':    # Capitalizes the first letter
+        return whitecard[0].capitalize() + whitecard[1:]
+    elif modifier is 'T':  # Capitalizes the First Letter of Each Word
+        return titlecase(whitecard)
+    elif modifier is 'A':  # CAPITALIZES ALL LETTERS OH MY GOD
+        return whitecard.upper()
+    elif modifier is 'S':  # lowercaseandspacelesswithoutpunctuation
+        return re.sub("\W", "", whitecard).lower()
+    else:
+        return whitecard
 
 
 # JUST GONNA INCLUDE THE WHOLE DAMN THING IN HERE
@@ -495,10 +520,6 @@ white = (
     "Garth Brooks",
     "Gary Coleman",
     "girls who shouldn't go wild",
-    "Glenn Beck being harried by a swarm of buzzards",
-    "Glenn Beck catching his scrotum on a curtain hook",
-    "Glenn Beck convulsively vomiting as a brood of crab spiders hatches in his brain and erupts from his tear ducts",
-    "Glenn Beck",
     "global warming",
     "goats eating cans",
     "goats eating coins",
@@ -2577,7 +2598,7 @@ black = (
     ("I'm a bitch, I'm a lover, I'm a child, I'm %s.", 'N'),
     ("It's Morphin' Time! Mastodon! Pterodactyl! Triceratops! Sabertooth Tiger! %s!", 'T'),
     ('Siskel and Ebert have panned %s as "poorly conceived" and "sloppily executed."', 'N'),
-    ('Tonight on SNICK: "Are You Afraid of %s?', 'T'),
+    ('Tonight on SNICK: "Are You Afraid of %s?"', 'T'),
     ('Up next on Nickelodeon: "Clarissa Explains %s."', 'T'),
     ###
     # Cards Against Humanity: Pax East 2013 Promo Pack A
@@ -2728,7 +2749,7 @@ black = (
     ("%s may pass, but %s will last forever.", 'CN'),
     ("%s will never be the same after %s.", 'CN'),
     ("2 AM in the city that never sleeps. The door swings open and she walks in, legs up to here. Something in her eyes tells me she's looking for %s.", 'N'),
-    ('Adventure. Romance. %s. From Paramount Pictures, "%s."', 'CT'),
+    ('Adventure. Romance. %s. From Paramount Pictures, "%s".', 'CT'),
     ("Alright, bros. Our frat house is condemned, and all the hot slampieces are over at Gamma Phi. The time has come to commence Operation %s.", 'T'),
     ("As king, how will I keep the peasants in line? %s.", 'C'),
     ("Dear Leader Kim Jong-un, our village praises your infinite wisdom with a humble offering of %s.", 'N'),
