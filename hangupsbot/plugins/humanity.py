@@ -522,10 +522,6 @@ white = (
     "Garth Brooks",
     "Gary Coleman",
     "girls who shouldn't go wild",
-    "Glenn Beck being harried by a swarm of buzzards",
-    "Glenn Beck catching his scrotum on a curtain hook",
-    "Glenn Beck convulsively vomiting as a brood of crab spiders hatches in his brain and erupts from his tear ducts",
-    "Glenn Beck",
     "global warming",
     "goats eating cans",
     "goats eating coins",
@@ -2604,7 +2600,7 @@ black = (
     ("I'm a bitch, I'm a lover, I'm a child, I'm %s.", 'N'),
     ("It's Morphin' Time! Mastodon! Pterodactyl! Triceratops! Sabertooth Tiger! %s!", 'T'),
     ('Siskel and Ebert have panned %s as "poorly conceived" and "sloppily executed."', 'N'),
-    ('Tonight on SNICK: "Are You Afraid of %s?', 'T'),
+    ('Tonight on SNICK: "Are You Afraid of %s?"', 'T'),
     ('Up next on Nickelodeon: "Clarissa Explains %s."', 'T'),
     ###
     # Cards Against Humanity: Pax East 2013 Promo Pack A
@@ -2755,7 +2751,7 @@ black = (
     ("%s may pass, but %s will last forever.", 'CN'),
     ("%s will never be the same after %s.", 'CN'),
     ("2 AM in the city that never sleeps. The door swings open and she walks in, legs up to here. Something in her eyes tells me she's looking for %s.", 'N'),
-    ('Adventure. Romance. %s. From Paramount Pictures, "%s."', 'CT'),
+    ('Adventure. Romance. %s. From Paramount Pictures, "%s".', 'CT'),
     ("Alright, bros. Our frat house is condemned, and all the hot slampieces are over at Gamma Phi. The time has come to commence Operation %s.", 'T'),
     ("As king, how will I keep the peasants in line? %s.", 'C'),
     ("Dear Leader Kim Jong-un, our village praises your infinite wisdom with a humble offering of %s.", 'N'),
