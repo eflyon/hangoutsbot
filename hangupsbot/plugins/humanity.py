@@ -1,5 +1,3 @@
-# This Python file uses the following encoding: utf-8
-
 import plugins
 import random
 import re
@@ -22,26 +20,26 @@ def _handle_bc(bot, event, command):
         yield from bot.coro_send_message(event.conv, fill_black(event.text[4:]))
 
 
-def fill_black(card):
-    fragments = re.split('(_[CTAS]?)', card)
-    for i, fragment in enumerate(fragments):
-        if fragment.startswith('_'):
-            fragments[i] = transform_white(random.choice(white), fragment[1:])
-    return "".join(fragments)
-
-
 def _handle_wc(bot, event, command):
     if event.text.startswith('.wc'):
         whites = event.text[4:].split(' # ')
 
         if len(whites) in (1, 2):
-            card, modifiers = random.choice(black)
-            while len(modifiers) != len(whites):
-                card, modifiers = random.choice(black)
-            yield from bot.coro_send_message(event.conv, 
-                card % tuple(transform_white(x, y) for x, y in zip(whites, modifiers)))
+            card = random.choice(black)
+            while card.count('_') != len(whites):
+                card = random.choice(black)
+            yield from bot.coro_send_message(event.conv, fill_black(card, whites))
         else:
             yield from bot.coro_send_message(event.conv, "One or two white cards only, please.")
+
+
+def fill_black(card, whites=None):
+    whiter = iter(whites) if whites else iter([])
+    fragments = re.split('(_[CTAS]?)', card)
+    for i, fragment in enumerate(fragments):
+        if fragment.startswith('_'):
+            fragments[i] = transform_white(next(whiter, random.choice(white)), fragment[1:])
+    return "".join(fragments)
 
 
 def transform_white(whitecard, modifier):
@@ -63,5 +61,6 @@ def load_cards():
         white = tuple(x for x in f.read().splitlines() if not x.startswith('#'))
     with open('cah-black-cards.txt', 'r') as f:
         black = tuple(x for x in f.read().splitlines() if not x.startswith('#'))
+
 
 load_cards()
