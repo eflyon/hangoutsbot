@@ -1,6 +1,7 @@
 import plugins
 import random
 import re
+import os
 from titlecase import titlecase
 
 
@@ -57,9 +58,11 @@ def transform_white(whitecard, modifier):
 
 def load_cards():
     global white, black
-    with open('cah-white-cards.txt', 'r') as f:
+    whitefile = os.path.join(os.path.dirname(__file__), 'cah-white-cards.txt')
+    blackfile = os.path.join(os.path.dirname(__file__), 'cah-black-cards.txt')
+    with open(whitefile, 'r') as f:
         white = tuple(x for x in f.read().splitlines() if not x.startswith('#'))
-    with open('cah-black-cards.txt', 'r') as f:
+    with open(blackfile, 'r') as f:
         black = tuple(x for x in f.read().splitlines() if not x.startswith('#'))
 
 
