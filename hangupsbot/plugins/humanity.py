@@ -67,4 +67,4 @@ def load_cards(bot, event, *args):
         black = tuple(x for x in f.read().splitlines() if not x.startswith('#'))
 
 
-load_cards()
+load_cards(None, None)
