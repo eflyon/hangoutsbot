@@ -9,6 +9,7 @@ def _initialise(bot):
     plugins.register_handler(_handle_hate)
     plugins.register_handler(_handle_bc)
     plugins.register_handler(_handle_wc)
+    plugins.register_admin_command(['load_cards'])
 
 
 def _handle_hate(bot, event, command):
@@ -56,7 +57,7 @@ def transform_white(whitecard, modifier):
         return whitecard
 
 
-def load_cards():
+def load_cards(bot, event, *args):
     global white, black
     whitefile = os.path.join(os.path.dirname(__file__), 'cah-white-cards.txt')
     blackfile = os.path.join(os.path.dirname(__file__), 'cah-black-cards.txt')
