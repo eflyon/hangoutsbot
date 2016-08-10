@@ -79,7 +79,7 @@ Anthropologists have recently discovered a primitive tribe that worships _.
 Due to a PR fiasco, Walmart no longer offers _.
 During Picasso's often-overlooked Brown Period, he produced hundreds of paintings of _.
 I wish I hadn't lost the instruction manual for _.
-In 1,000 years, when paper money is but a distant memory, _n will be our currency.
+In 1,000 years, when paper money is but a distant memory, _ will be our currency.
 In an attempt to reach a wider audience, the Smithsonian Museum of Natural History has opened an interactive exhibit on _.
 In his new summer comedy, Rob Schneider is _ trapped in the body of _.
 Life was difficult for cavemen before _.
@@ -114,7 +114,7 @@ Here is the church, here is the steeple. Open the doors, and there is _.
 How did I lose my virginity? _C.
 During his childhood, Salvador Dali produced hundreds of paintings of _.
 In 1,000 years, when paper money is a distant memory, how will we pay for goods and services? _C.
-The Smithsonian Museum of Natural History has just opened an interactive exhibit on _n.
+The Smithsonian Museum of Natural History has just opened an interactive exhibit on _.
 ###
 # CAH Main Deck version 1.4
 ###
@@ -704,3 +704,25 @@ I'm _, who the hell are you?
 # Inno's Star Wars Pack
 ###
 Hmm! _C. Hmmpf! _C. A Jedi craves not these things.
+###
+# 2016 Election Game
+###
+We are going to build _, and we are going to make Mexico pay for it.
+I am the least racist person there is. I'm even friends with _!
+Right-wingin' bitter-clingin' proud clingers of our guns, our God, and _.
+Don't judge me too hard - I voted for _!
+_C is in bed with Wall Street.
+I'm pretty sure "fundraising" is just a euphemism for _.
+###
+# Bad Campaign, the Presidential Party Game
+###
+I'll work with Congress to get _ for our children.
+I did not have sexual relations with _.
+Government of, by, and for _.
+Vote your conscience - vote for _.
+###
+# Winter's Ripoffs
+###
+Many people are saying that _ is _. I don't know.
+But wait, there's more! If you order _ in the next 15 minutes, we'll throw in _ absolutely free!
+Revealed: Why He Really Resigned! Pope Benedict's Secret Struggle with _T.
